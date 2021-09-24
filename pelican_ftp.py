@@ -14,9 +14,9 @@ from pathlib import Path
 # SERVER="ftp.domain.com"
 # USER="user@domain.com"
 # PSWRD="password"
+# LAST_UPDATE_FILENAME="lastupdate.txt"
 import creds
 
-LAST_UPDATE_FILENAME = "lastupdate.txt"
 
 SUB_PATHS = [
     # sub_path, file_spec, permissions (int)
@@ -65,8 +65,8 @@ def upload_file(ftp_connection, local_path, filename, remote_base, sub_path, per
 
 
 def check_and_upload_files(source_path, remote_base, force_update):
-    if os.path.exists(LAST_UPDATE_FILENAME):
-        last_update_date_time = os.path.getmtime(LAST_UPDATE_FILENAME)
+    if os.path.exists(creds.LAST_UPDATE_FILENAME):
+        last_update_date_time = os.path.getmtime(creds.LAST_UPDATE_FILENAME)
     else:
         # Bodge: If the file does not exist, set a very old last update date to force all files to update.
         last_update_date_time = 0
@@ -93,7 +93,7 @@ def check_and_upload_files(source_path, remote_base, force_update):
     logging.info(f"Uploaded {count} files.")
     if count > 0:
         # Update the modification date to now.
-        Path(LAST_UPDATE_FILENAME).touch()
+        Path(creds.LAST_UPDATE_FILENAME).touch()
 
 
 def handle_options():
