@@ -91,8 +91,9 @@ def check_and_upload_files(source_path, remote_base, force_update):
                     count += 1
 
     logging.info(f"Uploaded {count} files.")
-    # Update the modification date to now.
-    Path(LAST_UPDATE_FILENAME).touch()
+    if count > 0:
+        # Update the modification date to now.
+        Path(LAST_UPDATE_FILENAME).touch()
 
 
 def handle_options():
