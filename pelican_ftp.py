@@ -116,9 +116,15 @@ def handle_options():
     options, _ = ops.parse_args()
 
     if options.log_level:
-        logging.basicConfig(level=getattr(logging, options.log_level))
+        logging.basicConfig(
+            level=getattr(logging, options.log_level),
+            filename="/home/james/james_thinks_pelican/ftp.log"
+        )
     else:
-        logging.basicConfig(level=logging.INFO)
+        logging.basicConfig(
+            level=logging.INFO,
+            filename="/home/james/james_thinks_pelican/ftp.log"
+        )
 
     if options.source_path == '':
         logging.error("No source specified - nothing to do!")
