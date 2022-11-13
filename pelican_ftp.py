@@ -89,6 +89,9 @@ def check_and_upload_files(source_path, remote_base, force_update):
                         permissions_int=perms_int
                     )
                     count += 1
+                else:
+                    logging.debug(f"Did not update '{os.path.basename(fs_obj)}' with time: {os.path.getmtime(fs_obj)} "
+                                  f"and last_update: {last_update_date_time}, force_update={force_update}")
 
     logging.info(f"Uploaded {count} files.")
     if count > 0:
